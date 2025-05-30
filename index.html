@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>CRICKET GAME</title>
+ <style>
+  body{
+    text-align: center;
+  }
+  .ul{
+    text-align: left;
+  }
+ </style>
+</head>
+<body>
+<h1>
+  Bat Ball Stump GAME
+</h1>
+<div id="button">
+<button>Bat</button>
+<button>Ball</button>
+<button>Stump</button>
+</div>
+<div id="result"></div>
+  <h2>Result</h2>
+  <p>Click on the buttons to play the game</p>
+
+  <p class="ul">Rules:</p>
+  <ul class="ul">
+    <li><b>Bat beats Ball</b></li>
+    <li><b>Ball beats Stump</b></li>
+    <li><b>Stump beats Bat</b></li>
+  </ul>
+  <p class="ul">First to reach 5 points wins!</p>
+  <p class="ul">Good luck!</p>
+
+  <script>
+    const button = document.querySelectorAll('button');
+    const result = document.getElementById('result');
+    let userScore = 0;
+    let computerScore = 0;
+    button.forEach((button) => {
+      button.addEventListener('click', () => {
+        const userSelection = button.innerText;
+        const computerSelectionNo = Math.random() * 3;
+        let computerSelection='';
+        if (computerSelectionNo <= 1) {
+          computerSelection = 'Bat';
+        } else if (computerSelectionNo <= 2) {
+          computerSelection = 'Ball';
+        } else {
+          computerSelection = 'Stump';
+        }
+        const playGame = (userSelection, computerSelection) => {
+          if (userSelection === computerSelection) {
+            return 'It is a tie!';
+          }
+          if ((userSelection === 'Bat' && computerSelection === 'Ball') ||
+              (userSelection === 'Ball' && computerSelection === 'Stump') ||
+              (userSelection === 'Stump' && computerSelection === 'Bat')) {
+            userScore++;
+            return 'You win!';
+          } else {
+            computerScore++;
+            return 'Computer wins!';
+          }
+        };
+        result.innerHTML = `You selected ${userSelection} and the computer selected ${computerSelection}. ${playGame(userSelection, computerSelection)}. Current score: You - ${userScore}, Computer - ${computerScore}`;
+      });
+    });
+  </script>
+</body>
+</html>
